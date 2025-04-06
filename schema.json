@@ -1,0 +1,812 @@
+{
+  "name": "TickTick API",
+  "description": "The TickTick Open API provides a RESTful interface for accessing and managing user tasks, lists, and other related resources.",
+  "base_url": "https://api.ticktick.com",
+  "authentication": {
+    "type": "oauth2",
+    "description": "Authentication is done using Bearer token",
+    "header": "Authorization: Bearer {{token}}"
+  },
+  "endpoints": [
+    {
+      "name": "getTaskByProjectIdAndTaskId",
+      "description": "Get Task By Project ID And Task ID",
+      "path": "/open/v1/project/{projectId}/task/{taskId}",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        },
+        {
+          "name": "taskId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Task identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Task"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "createTask",
+      "description": "Create Task",
+      "path": "/open/v1/task",
+      "method": "POST",
+      "parameters": [
+        {
+          "name": "title",
+          "type": "string",
+          "in": "body",
+          "required": true,
+          "description": "Task title"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Task content"
+        },
+        {
+          "name": "desc",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Description of checklist"
+        },
+        {
+          "name": "isAllDay",
+          "type": "boolean",
+          "in": "body",
+          "required": false,
+          "description": "All day"
+        },
+        {
+          "name": "startDate",
+          "type": "date",
+          "in": "body",
+          "required": false,
+          "description": "Start date and time in 'yyyy-MM-dd'T'HH:mm:ssZ' format. Example: '2019-11-13T03:00:00+0000'"
+        },
+        {
+          "name": "dueDate",
+          "type": "date",
+          "in": "body",
+          "required": false,
+          "description": "Due date and time in 'yyyy-MM-dd'T'HH:mm:ssZ' format. Example: '2019-11-13T03:00:00+0000'"
+        },
+        {
+          "name": "timeZone",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "The time zone in which the time is specified"
+        },
+        {
+          "name": "reminders",
+          "type": "array",
+          "in": "body",
+          "required": false,
+          "description": "Lists of reminders specific to the task"
+        },
+        {
+          "name": "repeatFlag",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Recurring rules of task"
+        },
+        {
+          "name": "priority",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "The priority of task, default is '0'"
+        },
+        {
+          "name": "sortOrder",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "The order of task"
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "in": "body",
+          "required": false,
+          "description": "The list of subtasks"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Task"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "updateTask",
+      "description": "Update Task",
+      "path": "/open/v1/task/{taskId}",
+      "method": "POST",
+      "parameters": [
+        {
+          "name": "taskId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Task identifier"
+        },
+        {
+          "name": "id",
+          "type": "string",
+          "in": "body",
+          "required": true,
+          "description": "Task id"
+        },
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "body",
+          "required": true,
+          "description": "Project id"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Task title"
+        },
+        {
+          "name": "content",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Task content"
+        },
+        {
+          "name": "desc",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Description of checklist"
+        },
+        {
+          "name": "isAllDay",
+          "type": "boolean",
+          "in": "body",
+          "required": false,
+          "description": "All day"
+        },
+        {
+          "name": "startDate",
+          "type": "date",
+          "in": "body",
+          "required": false,
+          "description": "Start date and time in 'yyyy-MM-dd'T'HH:mm:ssZ' format. Example: '2019-11-13T03:00:00+0000'"
+        },
+        {
+          "name": "dueDate",
+          "type": "date",
+          "in": "body",
+          "required": false,
+          "description": "Due date and time in 'yyyy-MM-dd'T'HH:mm:ssZ' format. Example: '2019-11-13T03:00:00+0000'"
+        },
+        {
+          "name": "timeZone",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "The time zone in which the time is specified"
+        },
+        {
+          "name": "reminders",
+          "type": "array",
+          "in": "body",
+          "required": false,
+          "description": "Lists of reminders specific to the task"
+        },
+        {
+          "name": "repeatFlag",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "Recurring rules of task"
+        },
+        {
+          "name": "priority",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "The priority of task, default is 'normal'"
+        },
+        {
+          "name": "sortOrder",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "The order of task"
+        },
+        {
+          "name": "items",
+          "type": "array",
+          "in": "body",
+          "required": false,
+          "description": "The list of subtasks"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Task"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "completeTask",
+      "description": "Complete Task",
+      "path": "/open/v1/project/{projectId}/task/{taskId}/complete",
+      "method": "POST",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        },
+        {
+          "name": "taskId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Task identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "deleteTask",
+      "description": "Delete Task",
+      "path": "/open/v1/project/{projectId}/task/{taskId}",
+      "method": "DELETE",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        },
+        {
+          "name": "taskId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Task identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "getUserProject",
+      "description": "Get User Project",
+      "path": "/open/v1/project",
+      "method": "GET",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "array of Project"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "getProjectById",
+      "description": "Get Project By ID",
+      "path": "/open/v1/project/{projectId}",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Project"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "getProjectWithData",
+      "description": "Get Project With Data",
+      "path": "/open/v1/project/{projectId}/data",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "ProjectData"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "createProject",
+      "description": "Create Project",
+      "path": "/open/v1/project",
+      "method": "POST",
+      "parameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "in": "body",
+          "required": true,
+          "description": "name of the project"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "color of project, eg. '#F18181'"
+        },
+        {
+          "name": "sortOrder",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "sort order value of the project"
+        },
+        {
+          "name": "viewMode",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "view mode, 'list', 'kanban', 'timeline'"
+        },
+        {
+          "name": "kind",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "project kind, 'TASK', 'NOTE'"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Project"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "updateProject",
+      "description": "Update Project",
+      "path": "/open/v1/project/{projectId}",
+      "method": "POST",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "project identifier"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "name of the project"
+        },
+        {
+          "name": "color",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "color of the project"
+        },
+        {
+          "name": "sortOrder",
+          "type": "integer",
+          "in": "body",
+          "required": false,
+          "description": "sort order value, default 0"
+        },
+        {
+          "name": "viewMode",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "view mode, 'list', 'kanban', 'timeline'"
+        },
+        {
+          "name": "kind",
+          "type": "string",
+          "in": "body",
+          "required": false,
+          "description": "project kind, 'TASK', 'NOTE'"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": "Project"
+        },
+        "201": {
+          "description": "Created"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    },
+    {
+      "name": "deleteProject",
+      "description": "Delete Project",
+      "path": "/open/v1/project/{projectId}",
+      "method": "DELETE",
+      "parameters": [
+        {
+          "name": "projectId",
+          "type": "string",
+          "in": "path",
+          "required": true,
+          "description": "Project identifier"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK"
+        },
+        "401": {
+          "description": "Unauthorized"
+        },
+        "403": {
+          "description": "Forbidden"
+        },
+        "404": {
+          "description": "Not Found"
+        }
+      }
+    }
+  ],
+  "schemas": {
+    "ChecklistItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Subtask identifier"
+        },
+        "title": {
+          "type": "string",
+          "description": "Subtask title"
+        },
+        "status": {
+          "type": "integer",
+          "description": "The completion status of subtask. Value: Normal: 0, Completed: 1"
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subtask completed time in 'yyyy-MM-dd'T'HH:mm:ssZ'. Example: '2019-11-13T03:00:00+0000'"
+        },
+        "isAllDay": {
+          "type": "boolean",
+          "description": "All day"
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Subtask sort order. Example: 234444"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subtask start date time in 'yyyy-MM-dd'T'HH:mm:ssZ'. Example: '2019-11-13T03:00:00+0000'"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Subtask timezone. Example: 'America/Los_Angeles'"
+        }
+      }
+    },
+    "Task": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Task identifier"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Task project id"
+        },
+        "title": {
+          "type": "string",
+          "description": "Task title"
+        },
+        "isAllDay": {
+          "type": "boolean",
+          "description": "All day"
+        },
+        "completedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Task completed time in 'yyyy-MM-dd'T'HH:mm:ssZ'. Example: '2019-11-13T03:00:00+0000'"
+        },
+        "content": {
+          "type": "string",
+          "description": "Task content"
+        },
+        "desc": {
+          "type": "string",
+          "description": "Task description of checklist"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Task due date time in 'yyyy-MM-dd'T'HH:mm:ssZ'. Example: '2019-11-13T03:00:00+0000'"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/schemas/ChecklistItem"
+          },
+          "description": "Subtasks of Task"
+        },
+        "priority": {
+          "type": "integer",
+          "description": "Task priority. Value: None:0, Low:1, Medium:3, High:5"
+        },
+        "reminders": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of reminder triggers. Example: [ 'TRIGGER:P0DT9H0M0S', 'TRIGGER:PT0S' ]"
+        },
+        "repeatFlag": {
+          "type": "string",
+          "description": "Recurring rules of task. Example: 'RRULE:FREQ=DAILY;INTERVAL=1'"
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Task sort order. Example: 12345"
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start date time in 'yyyy-MM-dd'T'HH:mm:ssZ'. Example: '2019-11-13T03:00:00+0000'"
+        },
+        "status": {
+          "type": "integer",
+          "description": "Task completion status. Value: Normal: 0, Completed: 2"
+        },
+        "timeZone": {
+          "type": "string",
+          "description": "Task timezone. Example: 'America/Los_Angeles'"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Project identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Project name"
+        },
+        "color": {
+          "type": "string",
+          "description": "Project color"
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Order value"
+        },
+        "closed": {
+          "type": "boolean",
+          "description": "Project closed"
+        },
+        "groupId": {
+          "type": "string",
+          "description": "Project group identifier"
+        },
+        "viewMode": {
+          "type": "string",
+          "description": "view mode, 'list', 'kanban', 'timeline'"
+        },
+        "permission": {
+          "type": "string",
+          "description": "'read', 'write' or 'comment'"
+        },
+        "kind": {
+          "type": "string",
+          "description": "'TASK' or 'NOTE'"
+        }
+      }
+    },
+    "Column": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Column identifier"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Column name"
+        },
+        "sortOrder": {
+          "type": "integer",
+          "description": "Order value"
+        }
+      }
+    },
+    "ProjectData": {
+      "type": "object",
+      "properties": {
+        "project": {
+          "$ref": "#/schemas/Project",
+          "description": "Project info"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/schemas/Task"
+          },
+          "description": "Undone tasks under project"
+        },
+        "columns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/schemas/Column"
+          },
+          "description": "Columns under project"
+        }
+      }
+    }
+  }
+}
